@@ -1,0 +1,39 @@
+/* Electron overlay 模式样式 */
+
+/* 整个窗口透明可拖拽 */
+body.overlay-mode {
+  background: transparent !important;
+  -webkit-app-region: drag;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* overlay 根容器：紧凑居中 */
+body.overlay-mode .app {
+  min-height: 100vh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+}
+
+/* 标题和状态面板在 overlay 模式隐藏 */
+body.overlay-mode .app-title,
+body.overlay-mode .stats-panel {
+  display: none;
+}
+
+/* 角色区域不拦截拖拽 */
+body.overlay-mode .char-wrapper {
+  -webkit-app-region: no-drag;
+  cursor: move;
+  gap: 12px;
+}
+
+/* 标签字体稍小 */
+body.overlay-mode .char-label {
+  font-size: 11px;
+}
