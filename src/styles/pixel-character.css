@@ -1,0 +1,169 @@
+/* Pixel character: 16x16 grid using box-shadow on a single 8px pixel */
+.char-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/*
+  Pixel art "bot face" — 8px base unit
+  Each entry: X Y color  (offset from top-left corner pixel)
+  Layout (16 cols × 16 rows):
+    Row 0-1: antenna
+    Row 2-5: head (rounded square)
+    Row 6-9: face (eyes + mouth)
+    Row 10-13: body
+    Row 14-15: feet
+*/
+.char-pixel {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  position: relative;
+  image-rendering: pixelated;
+  margin: 80px 40px 20px;
+
+  box-shadow:
+    /* Antenna */
+    40px -16px var(--char-color),
+    40px -8px var(--char-color),
+
+    /* Head outline */
+    16px 0px var(--char-color),
+    24px 0px var(--char-color),
+    32px 0px var(--char-color),
+    40px 0px var(--char-color),
+    48px 0px var(--char-color),
+    56px 0px var(--char-color),
+    64px 0px var(--char-color),
+
+    8px 8px var(--char-color),
+    16px 8px #1a1a2e,
+    24px 8px #1a1a2e,
+    32px 8px #1a1a2e,
+    40px 8px #1a1a2e,
+    48px 8px #1a1a2e,
+    56px 8px #1a1a2e,
+    64px 8px #1a1a2e,
+    72px 8px var(--char-color),
+
+    8px 16px var(--char-color),
+    16px 16px #1a1a2e,
+    24px 16px #1a1a2e,
+    32px 16px #1a1a2e,
+    40px 16px #1a1a2e,
+    48px 16px #1a1a2e,
+    56px 16px #1a1a2e,
+    64px 16px #1a1a2e,
+    72px 16px var(--char-color),
+
+    /* Eyes row */
+    8px 24px var(--char-color),
+    16px 24px #1a1a2e,
+    24px 24px var(--char-color),  /* left eye */
+    32px 24px var(--char-color),
+    40px 24px #1a1a2e,
+    48px 24px #1a1a2e,
+    56px 24px var(--char-color),  /* right eye */
+    64px 24px #1a1a2e,
+    72px 24px var(--char-color),
+
+    8px 32px var(--char-color),
+    16px 32px #1a1a2e,
+    24px 32px #1a1a2e,
+    32px 32px #1a1a2e,
+    40px 32px #1a1a2e,
+    48px 32px #1a1a2e,
+    56px 32px #1a1a2e,
+    64px 32px #1a1a2e,
+    72px 32px var(--char-color),
+
+    /* Mouth row */
+    8px 40px var(--char-color),
+    16px 40px #1a1a2e,
+    24px 40px var(--char-color),  /* mouth left */
+    32px 40px var(--char-color),
+    40px 40px var(--char-color),
+    48px 40px var(--char-color),
+    56px 40px var(--char-color),  /* mouth right */
+    64px 40px #1a1a2e,
+    72px 40px var(--char-color),
+
+    16px 48px var(--char-color),
+    24px 48px var(--char-color),
+    32px 48px var(--char-color),
+    40px 48px var(--char-color),
+    48px 48px var(--char-color),
+    56px 48px var(--char-color),
+    64px 48px var(--char-color),
+
+    /* Body */
+    24px 56px var(--char-color),
+    32px 56px var(--char-color),
+    40px 56px var(--char-color),
+    48px 56px var(--char-color),
+    56px 56px var(--char-color),
+
+    24px 64px var(--char-color),
+    32px 64px var(--char-color),
+    40px 64px var(--char-color),
+    48px 64px var(--char-color),
+    56px 64px var(--char-color),
+
+    /* Feet */
+    24px 72px var(--char-color),
+    32px 72px var(--char-color),
+    48px 72px var(--char-color),
+    56px 72px var(--char-color);
+}
+
+/* ── Idle: slow float ── */
+@keyframes idle-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.char-idle {
+  animation: idle-float 2.4s ease-in-out infinite;
+}
+
+/* ── Thinking: pulse + faster float ── */
+@keyframes thinking-float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  25%       { transform: translateY(-6px) scale(1.04); }
+  75%       { transform: translateY(2px) scale(0.97); }
+}
+
+@keyframes thinking-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--char-color)); }
+  50%       { filter: drop-shadow(0 0 14px var(--char-color)); }
+}
+
+.char-thinking {
+  animation:
+    thinking-float 0.8s ease-in-out infinite,
+    thinking-glow  0.8s ease-in-out infinite;
+}
+
+/* ── Error: shake + color stays red via CSS var ── */
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.char-error {
+  animation: error-shake 0.6s ease-in-out infinite;
+}
+
+/* Label under character */
+.char-label {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
