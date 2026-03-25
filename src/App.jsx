@@ -23,7 +23,7 @@ const STATUS_DOT = {
   error:      '○',
 }
 
-export default function App() {
+export default function App({ CharacterComponent = PixelCharacter }) {
   const { status, lastUpdated, lastActiveAt, lastSource, presenceList, eventLog } = useOpenClawStatus()
 
   const connColor = STATUS_COLOR[status] ?? '#f87171'
