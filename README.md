@@ -23,7 +23,7 @@
 
 ```bash
 # 1. Clone and install / 克隆并安装依赖
-git clone https://github.com/YOUR_USERNAME/visible-openclaw.git
+git clone https://github.com/shuita666/visible-openclaw.git
 cd visible-openclaw
 npm install
 
